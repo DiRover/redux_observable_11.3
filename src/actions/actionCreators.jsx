@@ -1,5 +1,5 @@
 import {
-  LOAD_SERVICES_LIST,
+  LOAD_LIST,
   LOAD_SUCCESS,
   LOAD_DESCRIPTION,
   LOAD_DESCRIPTION_SUCCESS,
@@ -10,7 +10,7 @@ import {
 
 export const loadServicesList = () => {
   return {
-    type: LOAD_SERVICES_LIST,
+    type: LOAD_LIST,
   }
 }
 

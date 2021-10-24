@@ -1,4 +1,4 @@
-import { LOAD_SERVICES_LIST, LOAD_SUCCESS, LOAD_FAIL, LOAD_DESCRIPTION, LOAD_DESCRIPTION_SUCCESS, LOAD_DESCRIPTION_FAIL, CANCEL } from "../actions/actionTypes";
+import { LOAD_LIST, LOAD_SUCCESS, LOAD_FAIL, LOAD_DESCRIPTION, LOAD_DESCRIPTION_SUCCESS, LOAD_DESCRIPTION_FAIL, CANCEL } from "../actions/actionTypes";
 
 const initialState = {
     list: [],
@@ -11,12 +11,13 @@ const initialState = {
 
 export default function showListReducer(state = initialState, action) {
     switch (action.type) {
-        case LOAD_SERVICES_LIST:
+        case LOAD_LIST:
             return {
                 ...state, loading: true, error: false,
             }
         case LOAD_SUCCESS:
             const { list } = action.payload;
+            console.log(list)
             return {
                 ...state, list,
                 loading: false,

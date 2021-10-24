@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import Context from '../context/Context';
 import Spinner from '../components/Spinner';
 import Modal from './Modal';
+import Card from './Card';
 
 import styled from 'styled-components'
 
@@ -28,7 +29,7 @@ function List() {
                 {error && <Modal data={data}/>}
                 {(!loading && !error) && <div className="list-group">
                     {list.map((item) => {
-                        return <Link to={`/list/${item.id}`} key={item.id} onClick={() => getDescription(item.id)} className="list-group-item list-group-item-action list-group-item-info">{item.name}</Link>
+                        return <Card item={item} />
                     })}
                 </div>}
             </Container>
@@ -40,3 +41,6 @@ function List() {
 
 export default List;
 
+// {list.map((item) => {
+//     return <Link to={`/list/${item.id}`} key={item.id} onClick={() => getDescription(item.id)} className="list-group-item list-group-item-action list-group-item-info">{item.name}</Link>
+// })}

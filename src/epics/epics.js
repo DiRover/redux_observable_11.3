@@ -1,13 +1,15 @@
 import { ofType } from 'redux-observable';
 import { ajax } from 'rxjs/ajax';
 import { map, tap, switchMap, catchError } from 'rxjs/operators';
-import { LOAD_SERVICES_LIST, LOAD_DESCRIPTION } from '../actions/actionTypes';
+import { LOAD_LIST, LOAD_DESCRIPTION } from '../actions/actionTypes';
 import { loadSuccess, loadFail, loadDescriptionSuccess, loadDescriptionFail } from '../actions/actionCreators';
 import { of } from 'rxjs';
 
+console.log(`${process.env.REACT_APP_SEARCH_URL}/ra/news`);
+
 export const listEpic = action$ => action$.pipe(
-    ofType(LOAD_SERVICES_LIST),
-    switchMap(() => ajax.getJSON(`${process.env.REACT_APP_SEARCH_URL}/services`).pipe(
+    ofType(LOAD_LIST),
+    switchMap(() => ajax.getJSON(`${process.env.REACT_APP_SEARCH_URL}/ra/news`).pipe(
         map(respons => loadSuccess(respons)),
         catchError(() => of(loadFail()))
     )),
