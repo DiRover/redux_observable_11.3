@@ -5,6 +5,7 @@ import Context from '../context/Context';
 import Spinner from '../components/Spinner';
 import Modal from './Modal';
 import Card from './Card';
+import Button from './Button';
 
 import styled from 'styled-components'
 
@@ -27,11 +28,14 @@ function List() {
             <Container>
                 {loading && <Spinner />}
                 {error && <Modal data={data}/>}
-                {(!loading && !error) && <div className="list-group">
+                <div>
+                {!error && <div className="list-group">
                     {list.map((item) => {
                         return <Card item={item} />
                     })}
                 </div>}
+                <Button />
+                </div>
             </Container>
 
         </Fragment>

@@ -6,11 +6,18 @@ import {
   LOAD_FAIL,
   LOAD_DESCRIPTION_FAIL,
   CANCEL,
+  CONTINUATION,
 } from './actionTypes';
 
 export const loadServicesList = () => {
   return {
     type: LOAD_LIST,
+  }
+}
+
+export const loadContinuation = () => {
+  return {
+    type: CONTINUATION,
   }
 }
 

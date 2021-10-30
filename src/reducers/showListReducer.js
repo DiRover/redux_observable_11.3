@@ -1,4 +1,4 @@
-import { LOAD_LIST, LOAD_SUCCESS, LOAD_FAIL, LOAD_DESCRIPTION, LOAD_DESCRIPTION_SUCCESS, LOAD_DESCRIPTION_FAIL, CANCEL } from "../actions/actionTypes";
+import { LOAD_LIST, LOAD_SUCCESS, LOAD_FAIL, LOAD_DESCRIPTION, LOAD_DESCRIPTION_SUCCESS, LOAD_DESCRIPTION_FAIL, CANCEL, CONTINUATION } from "../actions/actionTypes";
 
 const initialState = {
     list: [],
@@ -42,6 +42,8 @@ export default function showListReducer(state = initialState, action) {
             return {
                 ...state, error: false, loading: false
             }
+        case CONTINUATION:
+            return { ...state, loading: true}
 
         default:
             return state;
