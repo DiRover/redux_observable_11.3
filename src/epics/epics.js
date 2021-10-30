@@ -17,8 +17,11 @@ export const listEpic = action$ => action$.pipe(
 
 export const descriptionEpic = action$ => action$.pipe(
     ofType(CONTINUATION),
-    switch
-)
+    switchMap(() => ajax.getJSON(`${process.env.REACT_APP_SEARCH_URL}/ra//news?lastSeenId=X`).pipe(
+        map(respons => loadSuccess(respons)),
+        catchError(() => of(loadFail()))
+    )),
+);
 
 // export const descriptionEpic = action$ => action$.pipe(
 //     ofType(LOAD_DESCRIPTION),
