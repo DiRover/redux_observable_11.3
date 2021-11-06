@@ -1,50 +1,57 @@
-import { LOAD_LIST, LOAD_SUCCESS, LOAD_FAIL, LOAD_DESCRIPTION, LOAD_DESCRIPTION_SUCCESS, LOAD_DESCRIPTION_FAIL, CANCEL, CONTINUATION } from "../actions/actionTypes";
+import { LOAD_LIST, LOAD_SUCCESS, LOAD_FAIL, LOAD_CONTINUATION_SUCCESS, LOAD_CONTINUATION_FAIL, CANCEL, CONTINUATION, END } from "../actions/actionTypes";
 
 const initialState = {
     list: [],
     loading: true,
     currentId: null,
-    description: null,
-    title: null,
-    error: false,
+    errorList: false,
+    errorContinuation: false,
+    lastSeenId: null,
+    errorToggle: false,
+    end: false,
 };
 
 export default function showListReducer(state = initialState, action) {
     switch (action.type) {
+
         case LOAD_LIST:
             return {
-                ...state, loading: true, error: false,
+                ...state, loading: true, errorList: false,
             }
+
         case LOAD_SUCCESS:
             const { list } = action.payload;
-            console.log(list)
             return {
                 ...state, list,
                 loading: false,
+                lastSeenId: list[list.length - 1].id,
             }
+
         case LOAD_FAIL:
-            return { ...state, error: true, loading: false }
-        case LOAD_DESCRIPTION:
-            const { id } = action.payload;
+            return { ...state, errorList: true, loading: false }
+
+        case CONTINUATION:
+            return { ...state, errorContinuation: false, loading: true}
+
+        case LOAD_CONTINUATION_SUCCESS:
+            let { respons } = action.payload;
             return {
-                ...state, loading: true, currentId: id, error: false,
+                ...state, list: [...state.list, ...respons], lastSeenId: respons[respons.length - 1].id, errorContinuation: false, loading: false
             }
-        case LOAD_DESCRIPTION_SUCCESS:
-            const { respons } = action.payload;
-            const description = respons.description;
-            const title = respons.title;
-            return {
-                ...state, loading: false, description: description, title: title
-            }
-        case LOAD_DESCRIPTION_FAIL:
-            return { ...state, error: true, loading: false }
+
+        case LOAD_CONTINUATION_FAIL:
+            return { ...state, errorContinuation: true, loading: false }
+
         case CANCEL:
             return {
-                ...state, error: false, loading: false
+                ...state, errorList: false, errorContinuation: false, loading: false
             }
-        case CONTINUATION:
-            return { ...state, loading: true}
 
+        case END:
+            const responsLast = action.payload.respons;
+            return {
+                ...state, list: [...state.list, ...responsLast], errorContinuation: false, loading: false, end: true,
+            }
         default:
             return state;
     }

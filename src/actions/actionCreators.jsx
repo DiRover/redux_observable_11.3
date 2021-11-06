@@ -1,23 +1,17 @@
 import {
   LOAD_LIST,
   LOAD_SUCCESS,
-  LOAD_DESCRIPTION,
-  LOAD_DESCRIPTION_SUCCESS,
+  END,
+  LOAD_CONTINUATION_SUCCESS,
   LOAD_FAIL,
-  LOAD_DESCRIPTION_FAIL,
+  LOAD_CONTINUATION_FAIL,
   CANCEL,
   CONTINUATION,
 } from './actionTypes';
 
-export const loadServicesList = () => {
+export const loadNewsList = () => {
   return {
     type: LOAD_LIST,
-  }
-}
-
-export const loadContinuation = () => {
-  return {
-    type: CONTINUATION,
   }
 }
 
@@ -26,7 +20,6 @@ export const loadSuccess = (respons) => {
   return {
     type: LOAD_SUCCESS,
     payload: { list },
-    loading: false,
   }
 }
 
@@ -36,23 +29,31 @@ export const loadFail = () => {
   }
 }
 
-export const loadDescription = (id) => {
+export const loadContinuation = (lastSeenId) => {
   return {
-    type: LOAD_DESCRIPTION,
-    payload: { id }
+    type: CONTINUATION,
+    payload: { lastSeenId }
   }
 }
 
-export const loadDescriptionSuccess = (respons) => {
-  return {
-    type: LOAD_DESCRIPTION_SUCCESS,
-    payload: { respons }
+export const loadContinuationSuccess = (respons) => {
+  if (respons.length < 5) {
+    return {
+      type: END,
+      payload: { respons }
+    }
+  } else {
+    return {
+      type: LOAD_CONTINUATION_SUCCESS,
+      payload: { respons }
+    }
   }
+  
 }
 
-export const loadDescriptionFail = () => {
+export const loadContinuationFail = () => {
   return {
-    type: LOAD_DESCRIPTION_FAIL,
+    type: LOAD_CONTINUATION_FAIL,
   }
 }
 

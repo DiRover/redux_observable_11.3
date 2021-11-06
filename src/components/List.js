@@ -1,7 +1,5 @@
-import { Fragment, useContext } from 'react';
+import { Fragment } from 'react';
 import { useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
-import Context from '../context/Context';
 import Spinner from '../components/Spinner';
 import Modal from './Modal';
 import Card from './Card';
@@ -19,22 +17,21 @@ margin: 30vh auto;
 
 
 function List() {
-    const { list, loading, error } = useSelector(state => state.list);
-    const { getDescription } = useContext(Context);
-    const data = "list";
+    const { list, loading, errorList, errorContinuation, lastSeenId, end } = useSelector(state => state.list);
 
     return (
         <Fragment>
             <Container>
-                {loading && <Spinner />}
-                {error && <Modal data={data}/>}
+                {errorList && <Modal errorList={errorList} />}
+                {errorContinuation && <Modal errorContinuation={errorContinuation} />}
                 <div>
-                {!error && <div className="list-group">
+                {!errorList && <div className="list-group">
                     {list.map((item) => {
-                        return <Card item={item} />
+                        return <Card item={item} key={item.id}/>
                     })}
                 </div>}
-                <Button />
+                {(loading && !end) && <Spinner />}
+                {(!loading && !end) && <Button lastSeenId={lastSeenId}/>}
                 </div>
             </Container>
 
@@ -44,7 +41,3 @@ function List() {
 };
 
 export default List;
-
-// {list.map((item) => {
-//     return <Link to={`/list/${item.id}`} key={item.id} onClick={() => getDescription(item.id)} className="list-group-item list-group-item-action list-group-item-info">{item.name}</Link>
-// })}

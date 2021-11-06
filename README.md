@@ -43,4 +43,6 @@ GET http://localhost:7070/api/news?lastSeenId=X
 
 Если научитесь отображать ещё и картинки со ссылками - будет вообще супер!
 
-
+Server API
+https://unionserver.herokuapp.com/api/ra/news
+https://unionserver.herokuapp.com/api/ra/news?lastSeenId=${lastSeenId}

@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import { loadServicesList } from '../actions/actionCreators';
+import { loadNewsList } from '../actions/actionCreators';
 import { useDispatch } from 'react-redux';
 import Blank from "./Blank";
 import List from "./List";
@@ -9,7 +9,7 @@ import {useEffect} from 'react';
 function UnionComponent(): JSX.Element {
     const dispatch = useDispatch();
     useEffect(() => {
-        dispatch(loadServicesList());
+        dispatch(loadNewsList());
     }, [dispatch])
     
 

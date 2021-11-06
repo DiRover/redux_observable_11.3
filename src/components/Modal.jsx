@@ -7,13 +7,14 @@ import { cancel } from '../actions/actionCreators';
 
 import Context from '../context/Context';
 
-export default function Modal(prop) {
-    const {data} = prop;
-    const { getDescription, getList } = useContext(Context);
-    const { currentId } = useSelector(state => state.list);
+export default function Modal(props) {
+    const {errorList} = props;
+    const {errorContinuation} = props;
+    const { getContinuation, getList } = useContext(Context);
+    const { lastSeenId } = useSelector(state => state.list);
     const dispatch = useDispatch();
 
-    const load = data === 'list' ? false : true;
+
 
 const cancelHandler = () => {
      dispatch(cancel());
@@ -32,7 +33,7 @@ return (
             </div>
             <div className="modal-footer">
                 <Link to='/blank'><button type="button" className="btn btn-secondary" data-bs-dismiss="modal" onClick={cancelHandler}>Nooo, it's too bored</button></ Link>
-                <button type="button" className="btn btn-primary" onClick={() => load ? getDescription(currentId) : getList()}>Yes, I do</button>
+                <button type="button" className="btn btn-primary" onClick={() => (errorList && getList()) || (errorContinuation && getContinuation(lastSeenId))}>Yes, I do</button>
             </div>
         </div>
     </div>

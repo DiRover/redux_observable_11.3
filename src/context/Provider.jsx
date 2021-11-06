@@ -1,19 +1,19 @@
 import Context from "./Context";
-import {loadDescription, loadServicesList} from "../actions/actionCreators";
+import {loadContinuation, loadNewsList} from "../actions/actionCreators";
 import { useDispatch } from 'react-redux';
 
 export default function Provider(prop) {
     const dispatch = useDispatch();
-    const getDescription = (id) => {
-        dispatch(loadDescription(id));
+    const getContinuation = (lastSeenId) => {
+        dispatch(loadContinuation(lastSeenId));
     }
 
     const getList = () => {
-        dispatch(loadServicesList());
+        dispatch(loadNewsList());
     }
 
     return(
-        <Context.Provider value={{getDescription, getList}}>
+        <Context.Provider value={{getContinuation, getList}}>
             {prop.children}
         </Context.Provider>
     )
