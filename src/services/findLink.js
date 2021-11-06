@@ -1,3 +1,6 @@
+//эта функция была нужна, чтобы найти ссылку в тексте, в json такая сидит и ломает весь css
+
+
 export default function findLink(template) {
     const link = template.match(/http:\/\/[^\s\Z]+/i);
     if (link) {

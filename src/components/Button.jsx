@@ -7,7 +7,7 @@ display: flex;
 justify-content: center;
 margin: 30px auto;
 `;
-
+//компонент с кнопкой для продолжения загрузки списка
 export default function Button(props) {
     const {lastSeenId} = props;
     const { getContinuation } = useContext(Context);

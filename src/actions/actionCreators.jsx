@@ -9,13 +9,13 @@ import {
   CONTINUATION,
 } from './actionTypes';
 
-export const loadNewsList = () => {
+export const loadNewsList = () => {//экшен первой загрузки списка
   return {
     type: LOAD_LIST,
   }
 }
 
-export const loadSuccess = (respons) => {
+export const loadSuccess = (respons) => {//экшен удачной загрузки списка
   const list = respons;
   return {
     type: LOAD_SUCCESS,
@@ -23,20 +23,20 @@ export const loadSuccess = (respons) => {
   }
 }
 
-export const loadFail = () => {
-  return {
+export const loadFail = () => {//ненужный, т.к. запросы повторяются автоматически каждые 3 сек.,
+  return {//экшен неудачной загрузки списка
     type: LOAD_FAIL,
   }
 }
 
-export const loadContinuation = (lastSeenId) => {
+export const loadContinuation = (lastSeenId) => {//экшен загрузки продолжения списка
   return {
     type: CONTINUATION,
     payload: { lastSeenId }
   }
 }
 
-export const loadContinuationSuccess = (respons) => {
+export const loadContinuationSuccess = (respons) => {//экшен удачной загрузки продолжения списка
   if (respons.length < 5) {
     return {
       type: END,
@@ -51,13 +51,13 @@ export const loadContinuationSuccess = (respons) => {
   
 }
 
-export const loadContinuationFail = () => {
-  return {
+export const loadContinuationFail = () => {//ненужный, т.к. запросы повторяются автоматически каждые 3 сек.,
+  return {// экшен неудачной закгрузки продолжения списка
     type: LOAD_CONTINUATION_FAIL,
   }
 }
 
-export const cancel = () => {
+export const cancel = () => {//просто отмена, тоже ненужно, ни как не обрабатываем
   return {
     type: CANCEL,
   }

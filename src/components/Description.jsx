@@ -12,7 +12,8 @@ align-items: center;
 width: 50%;
 margin: 30vh auto;
 `;
-
+//в компоненте нет необходимости
+//компонент для отображения описания элемента списка
 export default function Description() {
     const { description, title, loading, error } = useSelector(state => state.list);
 

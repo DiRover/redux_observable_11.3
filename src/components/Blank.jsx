@@ -10,7 +10,7 @@ width: 50%;
 margin: 30vh auto;
 `;
 
-
+//компонент для отображения бланковой страницы, в нем нет необходимости
 export default function Blank() {
     return (
         <Container>

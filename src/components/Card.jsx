@@ -31,7 +31,8 @@ font-size: 0.8rem;
 color: grey;
 width: 100%;
 `;
-
+//компонент для отображения элемента списка
+//ссылки в json на картинки не работают, вставил свои
 export default function Card(props) {
     const {item} = props;
     const index = getRandomInt(resurces.length);

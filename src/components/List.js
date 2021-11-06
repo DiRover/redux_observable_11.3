@@ -15,7 +15,7 @@ width: 50%;
 margin: 30vh auto;
 `;
 
-
+//компонент для отображения все списка
 function List() {
     const { list, loading, errorList, errorContinuation, lastSeenId, end } = useSelector(state => state.list);
 
